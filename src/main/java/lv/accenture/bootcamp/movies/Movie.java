@@ -42,13 +42,13 @@ public class Movie {
         this.rating = rating;
     }
 
-    public List<String> getCast() {
-        return cast;
-    }
+    //public List<String> getCast() {
+//        return cast;
+//    }
 
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
+    //public void setCast(List<String> cast) {
+//        this.cast = cast;
+//    }
 
     public <T> void getCast(List<T> be) {
     }

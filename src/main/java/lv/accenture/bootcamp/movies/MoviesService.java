@@ -38,17 +38,15 @@ public class MoviesService {
                         movie.getRating());
   }
 
-//    String sql="UPDATE customer SET phone=?, email=? WHERE username=?";
-//    jdbcTemplate.update(sql, userBean.getphone(), userBean.getemail(), <someUserNameHere>);
 
     public void update(String id, Movie movie) {
         String sqlQuery = "update movies set " +
-                "id = ?, name = ?, description = ?, rating = ? " +
+                "name = ?, description = ?, rating = ? " +
                 "where id = ?";
         jdbcTemplate.update(sqlQuery,
                     movie.getName(),
                     movie.getDescription(),
-                    movie.getRating());
+                    movie.getRating(), id);
     }
 
 

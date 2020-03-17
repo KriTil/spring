@@ -1,14 +1,17 @@
 package lv.accenture.bootcamp.movies;
 
+//import javax.persistence.*;
 import java.util.List;
 
+//@Entity
+//@Table(name="movies") //šis nepieciešams, ja klases un tabulas vārdi atšķiras
 public class Movie {
-
+    //@Id
     private String id;
     private String name;
     private String description;
     private Float rating;
-    private List<String> cast;
+    //private List<String> cast;
 
     public String getId() {
         return id;
@@ -50,6 +53,6 @@ public class Movie {
 //        this.cast = cast;
 //    }
 
-    public <T> void getCast(List<T> be) {
-    }
+//    public <T> void getCast(List<T> be) {
+//    }
 }

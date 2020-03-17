@@ -18,26 +18,14 @@ public class MoviesService {
 
     private List<Movie> movies;
     @PostConstruct
-    public void addMovie() {
-        List<Movie> movies = jdbcTemplate.query("SELECT id, name, description, rating FROM movies",
-                this::mapRow);
-    }
-
-    public Movie mapRow(ResultSet result, int rowNum) throws SQLException {
-        Movie movie = new Movie();
-        movie.setId(result.getString("id"));
-        movie.setName(result.getString("name"));
-        movie.setDescription(result.getString("description"));
-        movie.setRating(result.getFloat("rating"));
-        return movie;
-    }
-
 
     public List<Movie> movies() {
-        String sql = "select * from movies";
-        List<Movie> movies = jdbcTemplate.query("SELECT id, name, description, rating FROM movies",
+        return jdbcTemplate.query("SELECT id, name, description, rating FROM movies",
                 this::mapRow);
-        return movies;
+// arī der, bet sliktāks variants:
+//        List<Movie> movies = jdbcTemplate.query("SELECT id, name, description, rating FROM movies",
+//                this::mapRow);
+//        return movies;
     }
 
 
@@ -50,13 +38,14 @@ public class MoviesService {
                         movie.getRating());
   }
 
+//    String sql="UPDATE customer SET phone=?, email=? WHERE username=?";
+//    jdbcTemplate.update(sql, userBean.getphone(), userBean.getemail(), <someUserNameHere>);
 
     public void update(String id, Movie movie) {
         String sqlQuery = "update movies set " +
                 "id = ?, name = ?, description = ?, rating = ? " +
-                "where id ="+id+"";
+                "where id = ?";
         jdbcTemplate.update(sqlQuery,
-                    movie.getId(),
                     movie.getName(),
                     movie.getDescription(),
                     movie.getRating());
@@ -64,8 +53,18 @@ public class MoviesService {
 
 
    public int delete(String id) {
-            String sqlQuery = "delete from movies where id ="+id+"";
-            return jdbcTemplate.update(sqlQuery);
+            //String sqlQuery = "delete from movies where id ="+id+"";
+       String sqlQuerySafe = "delete from movies where id = ?";
+       return jdbcTemplate.update(sqlQuerySafe, id);
         }
-        
+
+    private Movie mapRow(ResultSet result, int rowNum) throws SQLException {
+        Movie movie = new Movie();
+        movie.setId(result.getString("id"));
+        movie.setName(result.getString("name"));
+        movie.setDescription(result.getString("description"));
+        movie.setRating(result.getFloat("rating"));
+        return movie;
+    }
+
 }

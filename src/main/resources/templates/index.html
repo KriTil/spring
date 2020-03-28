@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Movies</title>
+    <title>My Favourite Movies</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
@@ -21,7 +21,11 @@
             <h2 th:case="null">No movies yet!</h2>
 
             <div th:case="*">
-                <h2 class="my-5">Movies</h2>
+                <h2 class="my-5" align="center">My Favourite Movies</h2>
+                <p align="justify">I`m bad at remembering all that movies names and actors, so I can`t tell about the
+                    last good movie I have seen or recommend any good movie to friends. This is my favourite movies
+                    cheat-sheet. It use to change during the time as my taste for movies change.</p>
+
                 <table class="table table-hover table-striped table-responsive-md">
                     <thead>
                     <tr>
@@ -38,11 +42,12 @@
                         <td th:text="${movie.description}"></td>
                         <td th:text="${movie.rating}"></td>
                         <td>
-                            <a th:href="@{/edit/{id}(id=${movie.id})}" class="fas fa-edit fa-lg">
+                            <a title="edit" th:href="@{/edit/{id}(id=${movie.id})}" class="fas fa-edit fa-lg">
                                 <i class="icon-fixed-width icon-pencil"></i>
                             </a>
                         </td>
-                        <td><a th:href="@{/delete/{id}(id=${movie.id})}" class="fas fa-trash-alt fa-lg">
+                        <td>
+                            <a title="delete" th:href="@{/delete/{id}(id=${movie.id})}" class="fas fa-trash-alt fa-lg">
                             <i class="fas fa-movie-trash-alt fa-2x"></i></a>
                         </td>
                     </tr>
@@ -51,7 +56,7 @@
             </div>
 
             <p class="my-5">
-                <a href="/signup"class="fas fa-plus-square fa-4x">
+                <a title="add movie" href="/signup"class="fas fa-plus-square fa-4x">
                     <i class="fas fa-movie-plus-square"></i>
                 </a>
             </p>
